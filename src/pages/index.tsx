@@ -1,17 +1,7 @@
-import { Layout } from "src/components/layout";
 
 const Home = () => {
   return (
-    <Layout>
-      <button
-        className="btn-blue"
-        onClick={() => {
-          window.alert("Hello, World!");
-        }}
-      >
-        Button
-      </button>
-    </Layout>
+    <div>sapmle</div>
   );
 };
 
