@@ -8,6 +8,9 @@ interface Props {
 
 export const AddPresenterForm = (props: Props) => {
   const setClick = () => {
+    if (value === "") {
+      return;
+    }
     props.handleOnClick(value);
 
     setValue("");
@@ -21,7 +24,7 @@ export const AddPresenterForm = (props: Props) => {
 
   return (
     <>
-      <Form handleOnChange={handleOnChange} value={value} />
+      <Form handleOnChange={handleOnChange} handleOnKeyPress={setClick} value={value} />
       <Button name="Add" handleOnClick={setClick} />
     </>
   );
