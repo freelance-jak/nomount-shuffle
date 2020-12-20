@@ -1,15 +1,15 @@
 interface Props {
   name: string;
-  handleonclick: () => void;
+  handleOnClick: () => void;
 }
 
 export const Button = (props: Props) => {
-  const handleonclick = () => {
-    props.handleonclick();
+  const handleOnClick = () => {
+    props.handleOnClick();
   };
 
   return (
-    <button onClick={handleonclick} className="w-20 h-9 border-black border-2">
+    <button onClick={handleOnClick} className="w-20 h-9 border-black border-2 rounded-2xl">
       {props.name}
     </button>
   );
