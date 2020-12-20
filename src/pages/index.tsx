@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import DisplayStatusInputWait from '../components/organisms/DisplayStatusInputWait'
 import DisplayStatusShuffle from '../components/organisms/DisplayStatusShuffle'
+import Image from 'next/image'
 
 // 表示状態
 enum ENM_SHUFFLE_STATUS {
@@ -39,7 +40,10 @@ const Home = () => {
 
   return (
     <div className="m-6">
-      <h1>Shuffle!</h1>
+      <div className="flex m-1">
+        <Image src="/shuffle_icon.png" width={25} height={15} />
+        <h1 className="px-1">Shuffle!</h1>
+      </div>
       {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ?
         <DisplayStatusInputWait nameList={nameList} addPresenterCb={addPresenter} delPresenterCb={delPresenter} suffleStartCb={suffleStart} />
         : <DisplayStatusShuffle nameList={nameList} pageBackCb={pageBack} />}
