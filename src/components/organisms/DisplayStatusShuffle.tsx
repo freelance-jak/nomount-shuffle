@@ -54,7 +54,7 @@ const DisplayStatusShuffle = (props: Props) => {
                         : <div></div>
                     }
                     {shuffleCnt === SHUFFLE_MAX ?
-                        <Button name={"Back"} handleonclick={() => { pageBackCb() }} />
+                        <Button name={"Back"} handleOnClick={() => { pageBackCb() }} />
                         : <div></div>
                     }
                 </>

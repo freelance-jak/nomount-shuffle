@@ -1,5 +1,6 @@
 import PresenterNameList from '../molecules/PresenterNameList'
 import { Button } from '../atoms/button/button'
+import { AddPresenterForm } from '../molecules/AddPresenterForm'
 
 interface Props {
     nameList: string[];                         //プレゼンタ一覧
@@ -16,9 +17,11 @@ const DisplayStatusInputWait = (props: Props) => {
         <>
             {
                 <>
-                    <Button name={"Add!"} handleonclick={() => { addPresenterCb("aaa") }} />
+                    <AddPresenterForm handleOnClick={addPresenterCb} />
                     <PresenterNameList nameList={nameList} delPresenter={delPresenterCb} />
-                    <Button name={"Shuffle!"} handleonclick={() => { suffleStartCb() }} />
+
+                    <br />
+                    <Button name={"Shuffle!"} handleOnClick={() => { suffleStartCb() }} />
                 </>
             }
 

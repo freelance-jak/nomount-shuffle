@@ -13,7 +13,7 @@ const Home = () => {
   // 表示状態
   const [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
   // プレゼンタ名前一覧
-  const [nameList, setNameList] = useState(["aaa", "bbb", "ccc"] as string[]);
+  const [nameList, setNameList] = useState([] as string[]);
 
   // プレゼンタ追加
   const addPresenter = (name: string) => {

@@ -20,7 +20,7 @@ export const AddPresenterForm = (props: Props) => {
   return (
     <>
       <Form handleOnChange={handleOnChange} value={value} />
-      <Button name="shuffle" handleOnClick={setClick} />
+      <Button name="Add" handleOnClick={setClick} />
     </>
   );
 };
