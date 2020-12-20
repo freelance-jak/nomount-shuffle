@@ -1,11 +1,10 @@
 import PresenterNameText from '../atoms/PresenterNameText'
-import IconButton, { ENM_ICON } from '../atoms/IconButton'
 
 interface Props {
     name_list: string[];
 }
 
-const PresenterNameList = (props: Props) => {
+const ShuffleNameList = (props: Props) => {
     let { name_list } = props;
     return (
         <>
@@ -14,7 +13,6 @@ const PresenterNameList = (props: Props) => {
                     return (
                         <div className="flex m-3">
                             <PresenterNameText text={`${index + 1} - ${name}`} />
-                            <IconButton icon_type={ENM_ICON.ENM_ICON_MINUS} onclick_cb={() => { alert("aaa") }} />
                         </div>
                     )
                 })
@@ -23,4 +21,4 @@ const PresenterNameList = (props: Props) => {
     );
 }
 
-export default PresenterNameList;
+export default ShuffleNameList;
