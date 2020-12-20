@@ -9,12 +9,12 @@ interface Props {
     onclick_cb: OnClickFunctionType
 }
 
-const IconBotton = (props: Props) => {
+const IconButton = (props: Props) => {
     const getIconStyle = (type: ENM_ICON) => {
         switch (type) {
             case ENM_ICON.ENM_ICON_MINUS:
                 return (
-                    <button className="rounded-2xl w-7 border-solid border-black border hover:bg-red-700 focus:outline-none" onClick={() => { props.onclick_cb() }}>―</button>
+                    <button className="transform scale-50 rounded-2xl w-7 border-solid border-black border bg-gray-300 hover:bg-gray-400 focus:outline-none" onClick={() => { props.onclick_cb() }}>―</button>
                 )
         }
     }
@@ -26,4 +26,4 @@ const IconBotton = (props: Props) => {
     );
 }
 
-export default IconBotton;
+export default IconButton;
