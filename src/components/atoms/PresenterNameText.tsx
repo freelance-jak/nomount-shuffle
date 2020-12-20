@@ -1,5 +1,5 @@
 interface Props {
-    text: string;
+    text: string;       //プレゼンタ名
 }
 
 const PresenterNameText = (props: Props) => {

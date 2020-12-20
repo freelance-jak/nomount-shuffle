@@ -1,36 +1,48 @@
 import { useState } from 'react'
-import PresenterNameList from '../components/molecules/PresenterNameList'
-import ShuffleNameList from '../components/molecules/ShuffleNameList'
+import DisplayStatusInputWait from '../components/organisms/DisplayStatusInputWait'
+import DisplayStatusShuffle from '../components/organisms/DisplayStatusShuffle'
 
+// 表示状態
 enum ENM_SHUFFLE_STATUS {
-  ENM_INPUT_WAIT = 0,
-  ENM_SHUFFLE
+  ENM_INPUT_WAIT = 0,   //プレゼンタ入力状態
+  ENM_SHUFFLE           //シャッフル状態
 }
 
+// トップページ
 const Home = () => {
-  let [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
-  const namelist: string[] = ["aaa", "bbb"]
+  // 表示状態
+  const [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
+  // プレゼンタ名前一覧
+  const [nameList, setNameList] = useState(["aaa", "bbb", "ccc"] as string[]);
 
-  const DisplayStatusInputWait = () => {
-    return (
-      <>
-        <PresenterNameList name_list={namelist} />
-        <button className="m-6" onClick={() => { setStatus(ENM_SHUFFLE_STATUS.ENM_SHUFFLE) }}>Shuffle Start!</button>
-      </>
-    )
+  // プレゼンタ追加
+  const addPresenter = (name: string) => {
+    const tmpNameList = [...nameList];
+    tmpNameList.push(name);
+    setNameList(tmpNameList);
   }
-  const DisplayStatusShuffle = () => {
-    return (
-      <>
-        <ShuffleNameList name_list={namelist} />
-        <button className="m-6" onClick={() => { setStatus(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT) }}>back</button>
-      </>
-    )
+  // プレゼンタ削除
+  const delPresenter = (index: number) => {
+    const tmpNameList = [...nameList];
+    tmpNameList.splice(index, 1);
+    setNameList(tmpNameList);
   }
+
+  // シャッフル開始
+  const suffleStart = () => {
+    setStatus(ENM_SHUFFLE_STATUS.ENM_SHUFFLE);
+  }
+  // トップ画面に戻る
+  const pageBack = () => {
+    setStatus(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
+  }
+
   return (
     <div className="m-6">
-      <h2>Shuffle!</h2>
-      {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ? DisplayStatusInputWait() : DisplayStatusShuffle()}
+      <h1>Shuffle!</h1>
+      {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ?
+        <DisplayStatusInputWait nameList={nameList} addPresenterCb={addPresenter} delPresenterCb={delPresenter} suffleStartCb={suffleStart} />
+        : <DisplayStatusShuffle nameList={nameList} pageBackCb={pageBack} />}
     </div>
   );
 };
