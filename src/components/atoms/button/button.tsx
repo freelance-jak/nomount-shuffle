@@ -9,7 +9,7 @@ export const Button = (props: Props) => {
   };
 
   return (
-    <button onClick={handleonclick} class="w-20 h-9 border-black border-2">
+    <button onClick={handleonclick} className="w-20 h-9 border-black border-2">
       {props.name}
     </button>
   );
