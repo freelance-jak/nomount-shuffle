@@ -9,6 +9,8 @@ interface Props {
 export const AddPresenterForm = (props: Props) => {
   const setClick = () => {
     props.handleOnClick(value);
+
+    setValue("");
   };
 
   const [value, setValue] = useState("");
