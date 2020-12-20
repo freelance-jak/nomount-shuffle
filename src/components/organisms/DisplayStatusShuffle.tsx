@@ -3,28 +3,33 @@ import ShuffleNameList from '../molecules/ShuffleNameList'
 import { Button } from '../atoms/button/button'
 
 interface Props {
-    name_list: string[]
-    page_back_cb: () => void
+    nameList: string[];             //プレゼンタ一覧         
+    pageBackCb: () => void;         //入力待ちに戻るコールバック
 }
 
+// シャッフル状態表示
 const DisplayStatusShuffle = (props: Props) => {
-    const SHUFFLE_MAX = 10;
-    const { name_list, page_back_cb } = props;
-    const [shuffle_cnt, setShuffleCnt] = useState(0);
-    const [shuffle_name_list, setShuffleNameList] = useState([...name_list]);
+    const SHUFFLE_MAX = 10;                              //シャッフルの回数
+    const { nameList, pageBackCb } = props;
+    const [shuffleCnt, setShuffleCnt] = useState(0);    //シャッフルカウンタ
+    const [shuffleNameList, setShuffleNameList] = useState([...nameList]);      //シャッフルユーザリスト
 
+    // シャッフルプレゼンタリストの更新をトリガに再度シャッフル
     useEffect(() => {
-        if (shuffle_cnt < SHUFFLE_MAX) {
+        if (shuffleCnt < SHUFFLE_MAX) {
             setTimeout(() => { shuffle() }, 400);
         }
-    }, [shuffle_name_list])
+    }, [shuffleNameList])
 
+    // シャッフル処理
     const shuffle = () => {
-        setShuffleCnt(shuffle_cnt + 1);
+        // シャッフル回数インクリメント
+        setShuffleCnt(shuffleCnt + 1);
 
-        let tmpNameList = [...shuffle_name_list];
+        let tmpNameList = [...shuffleNameList];
 
-        let n = shuffle_name_list.length;
+        // ランダムな配列のインデックスを入れ替える
+        let n = shuffleNameList.length;
         let src = Math.floor(Math.random() * n);
         let dst = Math.floor(Math.random() * n);
 
@@ -32,6 +37,7 @@ const DisplayStatusShuffle = (props: Props) => {
         tmpNameList[src] = tmpNameList[dst];
         tmpNameList[dst] = tmp;
 
+        // シャッフルユーザリスト更新
         setShuffleNameList(tmpNameList);
     }
 
@@ -39,16 +45,16 @@ const DisplayStatusShuffle = (props: Props) => {
         <>
             {
                 <>
-                    {shuffle_cnt === SHUFFLE_MAX ?
+                    {shuffleCnt === SHUFFLE_MAX ?
                         <h2 className="m-5">決定!</h2>
                         : <h2 className="m-5">Shuffle Time!</h2>
                     }
-                    {shuffle_name_list != undefined ?
-                        <ShuffleNameList name_list={shuffle_name_list} />
+                    {shuffleNameList != undefined ?
+                        <ShuffleNameList nameList={shuffleNameList} />
                         : <div></div>
                     }
-                    {shuffle_cnt === SHUFFLE_MAX ?
-                        <Button name={"Back"} handleonclick={() => { page_back_cb() }} />
+                    {shuffleCnt === SHUFFLE_MAX ?
+                        <Button name={"Back"} handleonclick={() => { pageBackCb() }} />
                         : <div></div>
                     }
                 </>

@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
 import PresenterNameText from '../atoms/PresenterNameText'
 
 interface Props {
-    name_list: string[];
+    nameList: string[];     //名前リスト
 }
 
+// シャッフル名リスト
 const ShuffleNameList = (props: Props) => {
-    const { name_list } = props;
+    const { nameList } = props;
 
     return (
         <>
             {
-                name_list.map((name: string, index: number) => {
+                nameList.map((name: string, index: number) => {
                     return (
                         <div className="flex m-3">
                             <PresenterNameText text={`${index + 1} - ${name}`} />

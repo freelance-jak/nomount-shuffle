@@ -2,37 +2,47 @@ import { useState } from 'react'
 import DisplayStatusInputWait from '../components/organisms/DisplayStatusInputWait'
 import DisplayStatusShuffle from '../components/organisms/DisplayStatusShuffle'
 
+// 表示状態
 enum ENM_SHUFFLE_STATUS {
-  ENM_INPUT_WAIT = 0,
-  ENM_SHUFFLE
+  ENM_INPUT_WAIT = 0,   //プレゼンタ入力状態
+  ENM_SHUFFLE           //シャッフル状態
 }
 
+// トップページ
 const Home = () => {
+  // 表示状態
   const [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
-  const [name_list, setNameList] = useState(["aaa", "bbb", "cccc"]);
+  // プレゼンタ名前一覧
+  const [nameList, setNameList] = useState(["aaa", "bbb", "ccc"] as string[]);
 
-  const AddPresenter = (name: string) => {
-    const tmp_name_list = [...name_list];
-    tmp_name_list.push(name);
-    setNameList(tmp_name_list);
+  // プレゼンタ追加
+  const addPresenter = (name: string) => {
+    const tmpNameList = [...nameList];
+    tmpNameList.push(name);
+    setNameList(tmpNameList);
   }
-  const DelPresenter = (index: number) => {
-    const tmp_name_list = [...name_list];
-    tmp_name_list.splice(index, 1);
-    setNameList(tmp_name_list);
+  // プレゼンタ削除
+  const delPresenter = (index: number) => {
+    const tmpNameList = [...nameList];
+    tmpNameList.splice(index, 1);
+    setNameList(tmpNameList);
   }
 
-  const SuffleStart = () => {
+  // シャッフル開始
+  const suffleStart = () => {
     setStatus(ENM_SHUFFLE_STATUS.ENM_SHUFFLE);
   }
-  const PageBack = () => {
+  // トップ画面に戻る
+  const pageBack = () => {
     setStatus(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
   }
+
   return (
     <div className="m-6">
-      <h2>Shuffle!</h2>
+      <h1>Shuffle!</h1>
       {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ?
-        <DisplayStatusInputWait name_list={name_list} add_presenter_cb={AddPresenter} del_presenter_cb={DelPresenter} suffle_start_cb={SuffleStart} /> : <DisplayStatusShuffle name_list={name_list} page_back_cb={PageBack} />}
+        <DisplayStatusInputWait nameList={nameList} addPresenterCb={addPresenter} delPresenterCb={delPresenter} suffleStartCb={suffleStart} />
+        : <DisplayStatusShuffle nameList={nameList} pageBackCb={pageBack} />}
     </div>
   );
 };
