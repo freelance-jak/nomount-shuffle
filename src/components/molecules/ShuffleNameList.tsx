@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PresenterNameText from '../atoms/PresenterNameText'
 
 interface Props {
@@ -5,7 +6,8 @@ interface Props {
 }
 
 const ShuffleNameList = (props: Props) => {
-    let { name_list } = props;
+    const { name_list } = props;
+
     return (
         <>
             {

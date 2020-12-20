@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import PresenterNameList from '../components/molecules/PresenterNameList'
-import ShuffleNameList from '../components/molecules/ShuffleNameList'
+import DisplayStatusInputWait from '../components/organisms/DisplayStatusInputWait'
+import DisplayStatusShuffle from '../components/organisms/DisplayStatusShuffle'
 
 enum ENM_SHUFFLE_STATUS {
   ENM_INPUT_WAIT = 0,
@@ -8,29 +8,31 @@ enum ENM_SHUFFLE_STATUS {
 }
 
 const Home = () => {
-  let [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
-  const namelist: string[] = ["aaa", "bbb"]
+  const [status, setStatus] = useState(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
+  const [name_list, setNameList] = useState(["aaa", "bbb", "cccc"]);
 
-  const DisplayStatusInputWait = () => {
-    return (
-      <>
-        <PresenterNameList name_list={namelist} />
-        <button className="m-6" onClick={() => { setStatus(ENM_SHUFFLE_STATUS.ENM_SHUFFLE) }}>Shuffle Start!</button>
-      </>
-    )
+  const AddPresenter = (name: string) => {
+    const tmp_name_list = [...name_list];
+    tmp_name_list.push(name);
+    setNameList(tmp_name_list);
   }
-  const DisplayStatusShuffle = () => {
-    return (
-      <>
-        <ShuffleNameList name_list={namelist} />
-        <button className="m-6" onClick={() => { setStatus(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT) }}>back</button>
-      </>
-    )
+  const DelPresenter = (index: number) => {
+    const tmp_name_list = [...name_list];
+    tmp_name_list.splice(index, 1);
+    setNameList(tmp_name_list);
+  }
+
+  const SuffleStart = () => {
+    setStatus(ENM_SHUFFLE_STATUS.ENM_SHUFFLE);
+  }
+  const PageBack = () => {
+    setStatus(ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT);
   }
   return (
     <div className="m-6">
       <h2>Shuffle!</h2>
-      {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ? DisplayStatusInputWait() : DisplayStatusShuffle()}
+      {status === ENM_SHUFFLE_STATUS.ENM_INPUT_WAIT ?
+        <DisplayStatusInputWait name_list={name_list} add_presenter_cb={AddPresenter} del_presenter_cb={DelPresenter} suffle_start_cb={SuffleStart} /> : <DisplayStatusShuffle name_list={name_list} page_back_cb={PageBack} />}
     </div>
   );
 };

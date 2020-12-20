@@ -3,10 +3,11 @@ import IconButton, { ENM_ICON } from '../atoms/IconButton'
 
 interface Props {
     name_list: string[];
+    del_presenter: (index: number) => void;
 }
 
 const PresenterNameList = (props: Props) => {
-    let { name_list } = props;
+    const { name_list, del_presenter } = props;
     return (
         <>
             {
@@ -14,7 +15,7 @@ const PresenterNameList = (props: Props) => {
                     return (
                         <div className="flex m-3">
                             <PresenterNameText text={`${index + 1} - ${name}`} />
-                            <IconButton icon_type={ENM_ICON.ENM_ICON_MINUS} onclick_cb={() => { alert("aaa") }} />
+                            <IconButton icon_type={ENM_ICON.ENM_ICON_MINUS} onclick_cb={() => { del_presenter(index); }} />
                         </div>
                     )
                 })
