@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, KeyboardEvent } from "react";
+import type { KeyboardEvent } from "react";
 
 interface Props {
   handleOnChange: (inputValue: string) => void;
@@ -18,7 +18,11 @@ export const Form = (props: Props) => {
       onChange={(e) => {
         handleOnChange(e.target.value);
       }}
-      onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => { if (event.key == 'Enter') { props.handleOnKeyPress() } }}
+      onKeyPress={(event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key == "Enter") {
+          props.handleOnKeyPress();
+        }
+      }}
       className="w-40 h-9 border-black border-2 m-6"
     />
   );
